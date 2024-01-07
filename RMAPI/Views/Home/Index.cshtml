@@ -1,0 +1,38 @@
+﻿@model IndexViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome!</h1>
+    <p>Mars Rover pictures from NASA API</p>
+
+    <form asp-action="Index">
+        <div>
+        <label asp-for="Sol">Sol</label>
+        <input asp-for="Sol" />
+        </div>
+        <div>
+            <label asp-for="Camera">Camera</label>
+            <select asp-for="Camera" asp-items="Model.Cameras"></select>
+        </div>
+        <button type="submit">Click me!</button>
+    </form>
+
+    @if(Model.RoverResponse != null)
+    {
+        <div>
+            <h1>Response:</h1>
+            <ul>
+
+                @foreach (var image in Model.RoverResponse.Photos)
+                {
+                    <li>
+                        <p>Taken: @image.EarthDate.ToString() - by camera @image.Camera.FullName</p>
+                        <img src="@image.ImgSrc" />
+                    </li>
+                }
+
+            </ul>
+        </div>
+    }
+
+</div>
+        
